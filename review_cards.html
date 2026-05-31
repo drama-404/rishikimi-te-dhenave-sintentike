@@ -67,6 +67,8 @@
     .done { height: 30px; padding: 0 14px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: #fff; font: inherit; font-weight: 700; cursor: pointer; transition: background .12s, border-color .12s; }
     .done:hover { background: var(--accent-dark); }
     .done.marked { background: var(--high); border-color: var(--high); cursor: default; }
+    .done-wrap { padding: 10px 12px 0; }
+    .done-bottom { width: 100%; height: 40px; font-size: 14px; }
 
     .results { margin: 12px 12px 14px; border: 1px solid rgba(31, 111, 235, 0.28); border-radius: 9px; overflow: hidden; }
     .results-head { display: flex; align-items: baseline; gap: 8px; padding: 5px 10px; background: rgba(31, 111, 235, 0.08); border-bottom: 1px solid rgba(31, 111, 235, 0.18); }
@@ -78,6 +80,11 @@
     .score span { font-size: 17px; font-weight: 800; }
 
     .section-title { padding: 10px 12px 4px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+    .section-title.q18-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--muted); font: inherit; font-size: 11px; font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; transition: border-color .12s, color .12s; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: var(--high); color: var(--high); }
+    .copy-btn svg { display: block; }
 
     .demos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 2px 12px 6px; }
     .demo { min-width: 0; padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel-2); }
@@ -171,6 +178,9 @@
   <script>
     const STORAGE_KEY = "survey-review-completed-v1";
     const DATA_URL = "output/synthetic_records.json";
+
+    const ICON_COPY = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    const ICON_CHECK = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
     const likertCols = ["Nuk pajtohem aspak", "Nuk pajtohem", "Neutral", "Pajtohem", "Pajtohem plotesisht"];
 
@@ -305,16 +315,16 @@
           <div class="card-head">
             <span class="id">#${escapeHtml(id)}</span>
             <span class="arch">${escapeHtml(archLabel(record.metadata.archetype))}</span>
-            <span class="conf">${escapeHtml(conf)}</span>
             <span class="spacer"></span>
-            <button class="done" id="doneBtn" type="button">Rishikuar ✓</button>
+            <span class="conf">${escapeHtml(conf)}</span>
           </div>
           <div class="section-title">Profili demografik</div>
           ${demoHtml(record)}
           <div class="section-title">Matricat Likert (Q14–Q17)</div>
           ${matrices.map(m => matrixHtml(record, m)).join("")}
-          <div class="section-title">Q18 · Koment</div>
+          <div class="section-title q18-head"><span>Q18 · Koment</span>${comment ? `<button class="copy-btn" id="copyQ18" type="button" data-comment="${escapeHtml(comment)}" title="Kopjo komentin" aria-label="Kopjo komentin">${ICON_COPY}<span>Kopjo</span></button>` : ""}</div>
           <div class="comment ${comment ? "" : "empty"}">${comment ? escapeHtml(comment) : "Pa koment"}</div>
+          <div class="done-wrap"><button class="done done-bottom" id="doneBtn" type="button">Rishiko</button></div>
           <div class="results">
             <div class="results-head"><b>Rezultatet</b><small>vlera të llogaritura, jo përgjigje</small></div>
             <div class="scores">
@@ -364,6 +374,8 @@
       }
       slot.innerHTML = cardHtml(view[index]);
       document.getElementById("doneBtn").addEventListener("click", markDone);
+      const copyBtn = document.getElementById("copyQ18");
+      if (copyBtn) copyBtn.addEventListener("click", copyComment);
     }
 
     function markDone() {
@@ -371,14 +383,16 @@
       marking = true;
       const id = String(view[index].metadata.id);
       const btn = document.getElementById("doneBtn");
-      if (btn) { btn.classList.add("marked"); btn.textContent = "U rishikua ✓"; btn.disabled = true; }
-      // Brief green confirmation, then advance to the next unseen card.
+      if (btn) { btn.classList.add("marked"); btn.textContent = "Rishikuar ✓"; btn.disabled = true; }
+      // Brief green confirmation, then advance to the next unseen card and
+      // scroll back to the top so the next respondent starts from the header.
       setTimeout(() => {
         completed.add(id);
         saveCompleted();
         recomputeView();
         marking = false;
         render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }, 260);
     }
     function go(delta) {
@@ -386,6 +400,36 @@
       if (target < 0 || target >= view.length) return;
       index = target;
       render();
+    }
+
+    function copyComment(e) {
+      const btn = e.currentTarget;
+      const text = btn.dataset.comment || "";
+      if (!text) return;
+      const confirmCopied = () => {
+        btn.classList.add("copied");
+        btn.innerHTML = ICON_CHECK + "<span>U kopjua</span>";
+        setTimeout(() => {
+          btn.classList.remove("copied");
+          btn.innerHTML = ICON_COPY + "<span>Kopjo</span>";
+        }, 1300);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(confirmCopied).catch(() => fallbackCopy(text, confirmCopied));
+      } else {
+        fallbackCopy(text, confirmCopied);
+      }
+    }
+
+    function fallbackCopy(text, onSuccess) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); onSuccess(); } catch (_) {}
+      document.body.removeChild(ta);
     }
 
     function setupFilters() {
