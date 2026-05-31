@@ -118,13 +118,21 @@
     kbd { padding: 1px 5px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--panel); font: inherit; font-size: 10.5px; }
 
     @media (max-width: 560px) {
-      .stage { grid-template-columns: 30px 1fr 30px; gap: 6px; }
-      .nav { width: 30px; font-size: 17px; }
+      .topbar { flex-wrap: wrap; }
+      .controls { flex: 1; }
+      #archetypeFilter { flex: 1; }
+      .stage { grid-template-columns: 28px 1fr 28px; gap: 6px; }
+      .nav { width: 28px; font-size: 17px; }
       .demos { grid-template-columns: repeat(2, 1fr); }
+
+      /* Likert matrix stays as the 5-radio grid (just tighter columns/radios). */
       .mrow { grid-template-columns: 1fr repeat(5, 34px); }
       .mhead { font-size: 11px; }
       .mhead small { display: none; }
       .radio { width: 14px; height: 14px; }
+
+      /* No physical keyboard on touch devices; arrows + swipe handle nav. */
+      .hint { display: none; }
     }
   </style>
 </head>
@@ -420,6 +428,25 @@
       else if (e.key === "ArrowRight") go(1);
       else if (e.key.toLowerCase() === "d") markDone();
     });
+
+    // Touch devices: horizontal swipe over the card navigates prev/next.
+    // Only acts on clearly horizontal swipes so vertical scrolling still works.
+    (function enableSwipe() {
+      const stage = document.querySelector(".stage");
+      let x0 = null, y0 = null;
+      stage.addEventListener("touchstart", e => {
+        const t = e.changedTouches[0]; x0 = t.clientX; y0 = t.clientY;
+      }, { passive: true });
+      stage.addEventListener("touchend", e => {
+        if (x0 === null) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - x0, dy = t.clientY - y0;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          go(dx < 0 ? 1 : -1); // swipe left -> next, swipe right -> prev
+        }
+        x0 = y0 = null;
+      }, { passive: true });
+    })();
 
     fetch(DATA_URL)
       .then(r => { if (!r.ok) throw new Error(`Nuk u ngarkua ${DATA_URL}`); return r.json(); })
