@@ -1,0 +1,8 @@
+# Real survey export — never commit real respondent data to a (possibly public) repo
+*.xlsx
+
+# Local tooling / caches
+.claude/
+.vercel/
+__pycache__/
+*.pyc

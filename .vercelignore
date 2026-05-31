@@ -1,0 +1,13 @@
+# IMPORTANT: never publish the real survey export (contains real respondent data)
+*.xlsx
+
+# Generator + docs are not needed by the hosted review UI
+data_pipeline.py
+survey_specification_albanian.md
+survey_specification_albanian.json
+.claude
+
+# Local-only analysis artifacts — the UI only needs output/synthetic_records.json
+output/synthetic_analysis.csv
+output/synthetic_forms_export.csv
+output/analysis_summary.json
