@@ -773,6 +773,47 @@ def fallback_comment(rng: random.Random, profile: ArchetypeProfile) -> str:
     return rng.choice(profile.comment_templates)
 
 
+# Fields associated with personal tech-savviness in the banking context.
+TECH_SAVVY_FIELDS = {"Teknologji / IT", "Finance / Banke / Sigurime"}
+
+
+def tech_savvy_plausible(age: str, education: str, field: str) -> bool:
+    """Whether a respondent could realistically be a tech-savvy early adopter."""
+    if age in ("18-25", "26-35"):
+        return True  # digital natives: tech-savvy regardless of education
+    if age in ("36-45", "46-55"):
+        # Mid-age adopters only when well educated AND in a tech/finance field.
+        return education in DEGREE_LEVELS and field in TECH_SAVVY_FIELDS
+    return False  # 55+ : ~99% are not tech-savvy, so never an early adopter
+
+
+def _skeptic_archetype(age: str, education: str, rng: random.Random) -> str:
+    """Fallback non-tech-savvy archetype derived from the demographics."""
+    older = age in ("46-55", "55+")
+    low_education = education not in DEGREE_LEVELS
+    if older and low_education:
+        # Older + poorly educated -> mostly low-digital traditionalist.
+        return "Traditionalist" if rng.random() < 0.7 else "Cautious User"
+    if low_education and rng.random() < 0.3:
+        return "Traditionalist"
+    return "Cautious User"  # default: aware but skeptical, slow to try new things
+
+
+def resolve_archetype(candidate: str, age: str, education: str, field: str, rng: random.Random) -> str:
+    """Reassign tech-savvy archetypes when age/education/field make them implausible."""
+    degree = education in DEGREE_LEVELS
+    if candidate == "Early Adopter":
+        if tech_savvy_plausible(age, education, field):
+            return candidate
+        return _skeptic_archetype(age, education, rng)
+    if candidate == "Professional / Expert":
+        # Experts are educated professionals in tech/finance, not the 55+ cohort.
+        if degree and field in TECH_SAVVY_FIELDS and age != "55+":
+            return candidate
+        return _skeptic_archetype(age, education, rng)
+    return candidate  # Cautious User / Traditionalist are always plausible
+
+
 def generate_record(
     record_id: int,
     profile: ArchetypeProfile,
@@ -782,17 +823,22 @@ def generate_record(
 ) -> dict[str, Any]:
     start = datetime(2026, 5, 31, 8, 0, tzinfo=timezone.utc) + timedelta(minutes=record_id * 3 + rng.randint(0, 4))
     completion = start + timedelta(seconds=rng.randint(75, 420))
-    q10 = generate_q10_services(rng, profile)
-    likert_blocks = generate_likert_blocks(rng, profile)
     quota = demographic_quota or {}
 
-    # Resolve age first: it drives education and bank tenure. Then education and
-    # employment gate field selection (no degree -> no profession requiring one).
+    # Resolve demographics first (the candidate profile provides only soft skews).
+    # Age drives education and tenure; education+employment gate field selection.
     age = quota.get("Q3_age") or demographic_answer(rng, profile, "age")
     education = quota.get("Q4_education") or demographic_answer(rng, profile, "education", age=age)
     employment = demographic_answer(rng, profile, "employment", age=age)
     field = demographic_answer(rng, profile, "field", education=education, employment=employment)
     tenure = demographic_answer(rng, profile, "tenure", age=age)
+
+    # Gate the archetype ON the demographics: a 55+ or poorly-educated respondent
+    # cannot be a tech-savvy early adopter / expert. This may reassign the
+    # archetype, after which all attitudinal answers follow the FINAL archetype.
+    profile = ARCHETYPES[resolve_archetype(profile.name, age, education, field, rng)]
+    q10 = generate_q10_services(rng, profile)
+    likert_blocks = generate_likert_blocks(rng, profile)
 
     record = {
         "metadata": {

@@ -2,10 +2,10 @@
   "n": 400,
   "synthetic_only": true,
   "archetype_counts": {
-    "Cautious User": 160,
-    "Early Adopter": 120,
-    "Professional / Expert": 40,
-    "Traditionalist": 80
+    "Cautious User": 199,
+    "Early Adopter": 88,
+    "Professional / Expert": 18,
+    "Traditionalist": 95
   },
   "gender_counts": {
     "Femer": 192,
@@ -13,18 +13,18 @@
     "Preferoj te mos pergjigjem": 8
   },
   "age_counts": {
-    "18-25": 98,
-    "26-35": 132,
-    "36-45": 84,
-    "46-55": 55,
-    "55+": 31
+    "18-25": 103,
+    "26-35": 112,
+    "36-45": 81,
+    "46-55": 75,
+    "55+": 29
   },
   "education_counts": {
-    "Arsim baze (9-vjecar)": 53,
-    "Arsim i mesem (gjimnaz/profesional)": 109,
-    "Bachelor": 156,
-    "Doktorature": 12,
-    "Master": 70
+    "Arsim baze (9-vjecar)": 70,
+    "Arsim i mesem (gjimnaz/profesional)": 120,
+    "Bachelor": 153,
+    "Doktorature": 4,
+    "Master": 53
   },
   "location_counts": {
     "Durres": 48,
@@ -46,18 +46,18 @@
     "Tirana Bank": 20
   },
   "score_means": {
-    "perceived_usefulness": 3.613,
-    "adoption_readiness": 3.476,
-    "barriers": 3.467,
-    "trust_privacy_barrier": 3.752,
-    "governance_need": 3.984
+    "perceived_usefulness": 3.543,
+    "adoption_readiness": 3.362,
+    "barriers": 3.638,
+    "trust_privacy_barrier": 3.87,
+    "governance_need": 4.041
   },
-  "validation_confidence_mean": 0.761,
+  "validation_confidence_mean": 0.755,
   "hypothesis_checks": {
-    "H1a_pu_readiness_correlation": 0.523,
-    "H1b_trust_privacy_readiness_correlation": -0.283,
-    "H1b_trust_privacy_mean": 3.752,
-    "overall_barrier_mean": 3.467,
+    "H1a_pu_readiness_correlation": 0.578,
+    "H1b_trust_privacy_readiness_correlation": -0.334,
+    "H1b_trust_privacy_mean": 3.87,
+    "overall_barrier_mean": 3.638,
     "interpretation": "Expected synthetic pattern: perceived usefulness correlates positively with readiness (H1a, moderate positive r), while trust/privacy barriers correlate negatively with readiness and stay among the strongest barriers (H1b)."
   }
 }
