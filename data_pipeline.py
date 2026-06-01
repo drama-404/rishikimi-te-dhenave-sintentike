@@ -403,6 +403,33 @@ AGE_TENURE = {
 }
 # 36+ falls back to BASE_WEIGHTS["tenure"] (long tenures dominate).
 
+# Field-of-work skew by age (applied as multipliers on the base/archetype weights):
+#  - Agriculture (Bujqesi) is an older-cohort field (40+), rare among the young.
+#  - Tech/IT is concentrated in 18-35.
+#  - Finance and Medicine are common in 18-40, declining afterwards.
+AGE_FIELD_MULTIPLIERS = {
+    "18-25": {
+        "Teknologji / IT": 2.5, "Finance / Banke / Sigurime": 1.6, "Shendetesi / Mjekesi": 1.5,
+        "Ndertim / Inxhinieri": 0.7, "Administrate publike": 0.4, "Bujqesi": 0.08,
+    },
+    "26-35": {
+        "Teknologji / IT": 2.3, "Finance / Banke / Sigurime": 1.7, "Shendetesi / Mjekesi": 1.5,
+        "Administrate publike": 0.8, "Bujqesi": 0.2,
+    },
+    "36-45": {
+        "Teknologji / IT": 0.8, "Finance / Banke / Sigurime": 1.2, "Shendetesi / Mjekesi": 1.2,
+        "Ndertim / Inxhinieri": 1.2, "Administrate publike": 1.2, "Bujqesi": 1.3,
+    },
+    "46-55": {
+        "Teknologji / IT": 0.3, "Finance / Banke / Sigurime": 0.6, "Shendetesi / Mjekesi": 0.7,
+        "Ndertim / Inxhinieri": 1.2, "Administrate publike": 1.3, "Tregti / Sherbime": 1.1, "Bujqesi": 2.0,
+    },
+    "55+": {
+        "Teknologji / IT": 0.15, "Finance / Banke / Sigurime": 0.5, "Shendetesi / Mjekesi": 0.6,
+        "Administrate publike": 1.2, "Tregti / Sherbime": 1.1, "Bujqesi": 2.8,
+    },
+}
+
 
 def demographic_answer(
     rng: random.Random,
@@ -476,6 +503,11 @@ def demographic_answer(
             )
         elif profile.name == "Early Adopter":
             weights = adjust_weights(weights, {"Teknologji / IT": 2.0, "Finance / Banke / Sigurime": 1.6})
+
+        # Age skew: agriculture is an older-cohort field; tech/finance/medicine
+        # concentrate in the younger bands.
+        if age in AGE_FIELD_MULTIPLIERS:
+            weights = adjust_weights(weights, AGE_FIELD_MULTIPLIERS[age])
 
         # Consistency rule: no university degree -> cannot work in a profession
         # that requires one. Students are exempt (they may be studying it now).
@@ -830,7 +862,7 @@ def generate_record(
     age = quota.get("Q3_age") or demographic_answer(rng, profile, "age")
     education = quota.get("Q4_education") or demographic_answer(rng, profile, "education", age=age)
     employment = demographic_answer(rng, profile, "employment", age=age)
-    field = demographic_answer(rng, profile, "field", education=education, employment=employment)
+    field = demographic_answer(rng, profile, "field", education=education, employment=employment, age=age)
     tenure = demographic_answer(rng, profile, "tenure", age=age)
 
     # Gate the archetype ON the demographics: a 55+ or poorly-educated respondent
