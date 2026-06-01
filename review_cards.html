@@ -178,6 +178,7 @@
   <script>
     const STORAGE_KEY = "survey-review-completed-v1";
     const DATA_URL = "output/synthetic_records.json";
+    const API_URL = "/api/reviewed"; // cross-device persistence (falls back to localStorage)
 
     const ICON_COPY = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
     const ICON_CHECK = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
@@ -261,6 +262,31 @@
       catch { return new Set(); }
     }
     function saveCompleted() { localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed])); }
+
+    // Pull the shared reviewed set from the server (source of truth across devices).
+    // If the server is unreachable (offline / file://), keep the localStorage cache.
+    async function syncFromServer() {
+      try {
+        const r = await fetch(API_URL, { cache: "no-store" });
+        if (r.ok) {
+          const j = await r.json();
+          completed = new Set((j.reviewed || []).map(String));
+          saveCompleted(); // refresh local cache
+          return true;
+        }
+      } catch (_) { /* keep local cache */ }
+      return false;
+    }
+    function pushReviewed(id) {
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: String(id) }),
+      }).catch(() => {});
+    }
+    function clearReviewedServer() {
+      return fetch(API_URL, { method: "DELETE" }).catch(() => {});
+    }
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -384,6 +410,7 @@
       const id = String(view[index].metadata.id);
       const btn = document.getElementById("doneBtn");
       if (btn) { btn.classList.add("marked"); btn.textContent = "Rishikuar ✓"; btn.disabled = true; }
+      pushReviewed(id); // persist across devices
       // Brief green confirmation, then advance to the next unseen card and
       // scroll back to the top so the next respondent starts from the header.
       setTimeout(() => {
@@ -460,6 +487,7 @@
       if (!confirm(warning)) return;
       // Second, deliberate confirmation given the gravity of losing all progress.
       if (!confirm(`Konfirmim i fundit: të fshihen përfundimisht ${n} shenja 'Rishikuar'?`)) return;
+      clearReviewedServer(); // clear shared set across devices too
       completed = new Set();
       saveCompleted();
       index = 0;
@@ -494,7 +522,13 @@
 
     fetch(DATA_URL)
       .then(r => { if (!r.ok) throw new Error(`Nuk u ngarkua ${DATA_URL}`); return r.json(); })
-      .then(data => { records = data; setupFilters(); recomputeView(); render(); })
+      .then(async data => {
+        records = data;
+        setupFilters();
+        await syncFromServer(); // adopt the cross-device reviewed set before first render
+        recomputeView();
+        render();
+      })
       .catch(err => {
         document.getElementById("cardSlot").innerHTML =
           `<section class="empty visible"><strong>${escapeHtml(err.message)}</strong>Shërbejeni këtë faqe përmes http (p.sh. <code>python -m http.server</code>) që shfletuesi të lexojë JSON-in.</section>`;

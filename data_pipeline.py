@@ -443,10 +443,25 @@ def demographic_answer(
         weights = AGE_TENURE.get(age, BASE_WEIGHTS["tenure"])
 
     if group == "employment":
+        # Age-conditioned employment with HARD real-world constraints:
+        #   - Students exist ONLY in the 18-25 band.
+        #   - Retirees exist ONLY in the 55+ band (Albanian pension age is ~61 for
+        #     women and ~65 for men, so nobody under ~55 can be retired).
+        weights = dict(BASE_WEIGHTS["employment"])
+        if age == "18-25":
+            weights = adjust_weights(weights, {"Student/e": 3.0, "I/e vetepunesuar": 0.4})
+        elif age == "55+":
+            weights = adjust_weights(weights, {"I/e dale ne pension": 5.0, "I/e punesuar": 0.6})
         if profile.name == "Traditionalist":
             weights = adjust_weights(weights, {"I/e dale ne pension": 2.0, "Student/e": 0.4})
         elif profile.name == "Professional / Expert":
             weights = adjust_weights(weights, {"I/e punesuar": 1.5, "I/e vetepunesuar": 1.4, "I/e papune": 0.3})
+        # Enforce the hard rules regardless of the nudges above.
+        if age != "18-25":
+            weights = {k: v for k, v in weights.items() if k != "Student/e"}
+        if age != "55+":
+            weights = {k: v for k, v in weights.items() if k != "I/e dale ne pension"}
+        weights = normalize_weights(weights)
 
     if group == "field":
         if profile.name == "Professional / Expert":
@@ -775,7 +790,7 @@ def generate_record(
     # employment gate field selection (no degree -> no profession requiring one).
     age = quota.get("Q3_age") or demographic_answer(rng, profile, "age")
     education = quota.get("Q4_education") or demographic_answer(rng, profile, "education", age=age)
-    employment = demographic_answer(rng, profile, "employment")
+    employment = demographic_answer(rng, profile, "employment", age=age)
     field = demographic_answer(rng, profile, "field", education=education, employment=employment)
     tenure = demographic_answer(rng, profile, "tenure", age=age)
 
