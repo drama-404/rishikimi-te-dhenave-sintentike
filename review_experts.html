@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rishikimi i Eksperteve (Sintetike)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef1f5; --panel: #ffffff; --panel-2: #f8fafc; --text: #16202a; --muted: #6a7787;
+      --line: #dde3ea; --line-2: #eef1f5; --accent: #6d28d9; --accent-dark: #5b21b6;
+      --low: #c2410c; --mid: #a16207; --high: #15803d; --shadow: 0 10px 30px rgba(22,32,42,.10);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(1200px 600px at 50% -10%, #f5f3fb, var(--bg)); color: var(--text); font: 13.5px/1.4 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .shell { width: min(760px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 32px; }
+
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: 16px; font-weight: 750; letter-spacing: -.2px; }
+    .syn-note { margin-top: 2px; font-size: 11px; color: var(--muted); }
+    .controls { display: flex; align-items: center; gap: 8px; }
+    select, .btn { height: 32px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--text); font: inherit; }
+    select { padding: 0 26px 0 9px; cursor: pointer; }
+    .btn { cursor: pointer; padding: 0 11px; font-weight: 600; color: var(--muted); }
+    .btn:hover { border-color: var(--accent); color: var(--text); }
+    #resetSeen:hover { border-color: var(--low); color: var(--low); background: rgba(194,65,12,.06); }
+
+    .progress { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 12px; color: var(--muted); }
+    .bar { flex: 1; height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+    .bar > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), #9b6cf0); transition: width .25s ease; }
+    .progress b { color: var(--text); font-weight: 700; }
+
+    .stage { display: grid; grid-template-columns: 40px 1fr 40px; align-items: stretch; gap: 10px; }
+    .nav { width: 40px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--muted); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s, color .15s, border-color .15s; }
+    .nav:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+    .nav:disabled { opacity: .35; cursor: default; }
+
+    .card { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+    .card-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--panel-2); }
+    .id { font-weight: 800; font-size: 14px; }
+    .role { padding: 2px 9px; border-radius: 999px; background: #efe7fd; color: var(--accent-dark); font-size: 11.5px; font-weight: 650; white-space: nowrap; }
+    .bank { font-size: 11.5px; color: var(--muted); }
+    .spacer { flex: 1; }
+
+    .section-title { padding: 10px 12px 4px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+    .section-title.with-copy { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+    .demos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 2px 12px 6px; }
+    .demo { min-width: 0; padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel-2); }
+    .demo b { display: block; font-size: 10px; color: var(--muted); font-weight: 600; }
+    .demo b i { color: var(--accent-dark); font-style: normal; font-weight: 700; }
+    .demo span { font-size: 12.5px; font-weight: 550; overflow-wrap: anywhere; }
+    .chips { display: flex; flex-wrap: wrap; gap: 4px; padding: 2px 12px 8px; }
+    .chip { padding: 2px 8px; border-radius: 999px; background: rgba(109,40,217,.07); border: 1px solid rgba(109,40,217,.18); color: var(--accent-dark); font-size: 11px; }
+
+    .scores { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 4px; }
+    .score { padding: 8px 10px; background: var(--panel); text-align: center; }
+    .score b { display: block; font-size: 10px; color: var(--muted); font-weight: 650; }
+    .score span { font-size: 17px; font-weight: 800; }
+
+    .rank { list-style: none; margin: 0; padding: 2px 12px 8px; counter-reset: r; }
+    .rank li { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 12px; border-top: 1px solid var(--line-2); }
+    .rank li:first-child { border-top: 0; }
+    .rank li::before { counter-increment: r; content: counter(r); display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; flex: none; }
+
+    .matrix { margin: 4px 12px 0; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+    .mrow { display: grid; grid-template-columns: 1fr repeat(5, 50px); align-items: center; }
+    .mrow + .mrow { border-top: 1px solid var(--line-2); }
+    .mhrow { background: #fbfcfe; border-bottom: 1px solid var(--line); }
+    .mhead { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); padding: 4px 1px; }
+    .mhead small { display: block; font-size: 8px; font-weight: 500; line-height: 1.05; margin-top: 1px; }
+    .mhcorner { padding-left: 9px; font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+    .mstmt { font-size: 11px; color: #34404c; padding: 5px 9px; line-height: 1.25; }
+    .mcell { display: flex; align-items: center; justify-content: center; padding: 4px 0; }
+    .radio { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid #cfd6df; background: #fff; }
+    .radio.sel { border-color: transparent; box-shadow: 0 0 0 2px rgba(0,0,0,.04); }
+    .radio.sel.low { background: var(--low); } .radio.sel.mid { background: var(--mid); } .radio.sel.high { background: var(--high); }
+
+    .text { margin: 2px 12px 6px; padding: 8px 10px; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: var(--panel-2); font-size: 12.5px; color: #34404c; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .text.empty { color: var(--muted); font-style: italic; }
+    .value { margin: 2px 12px 6px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); font-size: 12.5px; font-weight: 550; }
+    .value.rating { font-weight: 800; font-size: 15px; }
+    .value.rating.low { color: var(--low); } .value.rating.mid { color: var(--mid); } .value.rating.high { color: var(--high); }
+
+    .copy-btn { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--muted); font: inherit; font-size: 11px; font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; transition: border-color .12s, color .12s; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: var(--high); color: var(--high); }
+    .copy-btn svg { display: block; }
+
+    .done-wrap { padding: 10px 12px 0; }
+    .done { width: 100%; height: 40px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: #fff; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .12s, border-color .12s; }
+    .done:hover { background: var(--accent-dark); }
+    .done.marked { background: var(--high); border-color: var(--high); cursor: default; }
+    .pad-bottom { height: 14px; }
+
+    .empty { display: none; padding: 40px 20px; text-align: center; color: var(--muted); }
+    .empty.visible { display: block; }
+    .empty strong { display: block; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+    .hint { margin-top: 10px; text-align: center; font-size: 11px; color: var(--muted); }
+    kbd { padding: 1px 5px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--panel); font: inherit; font-size: 10.5px; }
+
+    @media (max-width: 560px) {
+      .topbar { flex-wrap: wrap; } .controls { flex: 1; } #archetypeFilter { flex: 1; }
+      .stage { grid-template-columns: 28px 1fr 28px; gap: 6px; }
+      .nav { width: 28px; font-size: 17px; }
+      .mrow { grid-template-columns: 1fr repeat(5, 34px); }
+      .mhead { font-size: 11px; } .mhead small { display: none; } .radio { width: 14px; height: 14px; }
+      .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <h1>Rishikimi i Eksperteve (Sintetike)</h1>
+        <div class="syn-note">Të dhëna sintetike të deklaruara — vetëm për mbështetje metodologjike.</div>
+      </div>
+      <div class="controls">
+        <select id="archetypeFilter" aria-label="Filtri i rolit">
+          <option value="all">Të gjitha rolet</option>
+        </select>
+        <button class="btn" id="resetSeen" type="button">Rivendos</button>
+      </div>
+    </header>
+
+    <div class="progress">
+      <span><b id="position">0</b> / <span id="visibleCount">0</span></span>
+      <span class="bar"><i id="barFill"></i></span>
+      <span><b id="completedCount">0</b> të rishikuara · <span id="totalCount">0</span> gjithsej</span>
+    </div>
+
+    <div class="stage">
+      <button class="nav" id="prevBtn" type="button" aria-label="I mëparshmi">‹</button>
+      <div id="cardSlot"><section class="empty" id="emptyState"><strong>Duke ngarkuar…</strong></section></div>
+      <button class="nav" id="nextBtn" type="button" aria-label="Pasardhësi">›</button>
+    </div>
+
+    <div class="hint"><kbd>←</kbd> <kbd>→</kbd> për të lëvizur · <kbd>D</kbd> shënoje si të rishikuar</div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "expert-review-completed-v1";
+    const DATA_URL = "output/experts_records.json";
+    const API_URL = "/api/reviewed?form=experts"; // separate reviewed-set from customers
+
+    const ICON_COPY = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    const ICON_CHECK = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+    const roleShort = {
+      "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)": "Drejtues i lartë",
+      "Menaxher IT / Teknologjie / Inovacioni": "Menaxher IT",
+      "Perfaqesues rregullator (Banka e Shqiperise, AFSA, ose institucion tjeter mbikeqyres)": "Rregullator",
+      "Konsulent ose ekspert i jashtem (fintech, teknologji, financa)": "Konsulent",
+      "Akademik / Kerkues shkencor": "Akademik"
+    };
+    const shortRole = r => roleShort[r] || r;
+
+    // All questions in form order (Q2 -> Q18), each rendered with its own widget.
+    const questions = [
+      { code: "Q2", label: "Roli aktual", type: "value", get: a => a.Q2_role },
+      { code: "Q3", label: "Përvoja në sektorin bankar/financiar", type: "value", get: a => a.Q3_experience },
+      { code: "Q4", label: "Njësi e dedikuar për transformim digjital/inovacion", type: "value", get: a => a.Q4_dept },
+      { code: "Q5", label: "Institucioni përdor IA", type: "value", get: a => a.Q5_uses_ai },
+      { code: "Q6", label: "Fushat e përdorimit/planifikimit të IA", type: "chips", get: a => a.Q6_areas },
+      { code: "Q7", label: "Shembull konkret i përdorimit të IA", type: "text", get: a => a.Q7_example },
+      { code: "Q8", label: "Potenciali i IA (5–10 vjet)", type: "rating", get: a => a.Q8_potential },
+      { code: "Q9", label: "Renditja e fushave sipas potencialit", type: "rank", get: a => a.Q9_ranking },
+      { code: "Q10", label: "Ndryshim në pritshmëritë e klientëve", type: "text", get: a => a.Q10_customer_change },
+      { code: "Q11", label: "Barrierat për adoptimin e IA", type: "barriers", get: a => a.Q11_barriers },
+      { code: "Q12", label: "Bariera më urgjente", type: "text", get: a => a.Q12_urgent_barrier },
+      { code: "Q13", label: "Shqetësime privatësie / etike / transparence", type: "text", get: a => a.Q13_privacy },
+      { code: "Q14", label: "Kuadri aktual rregullator", type: "value", get: a => a.Q14_regulation },
+      { code: "Q15", label: "Gatishmëria për EU AI Act", type: "rating", get: a => a.Q15_eu_ai_act },
+      { code: "Q16", label: "Rekomandime për BSH/AFSA/qeverinë", type: "text", get: a => a.Q16_recommendations },
+      { code: "Q17", label: "Vizioni 5–10 vjet", type: "text", get: a => a.Q17_vision },
+      { code: "Q18", label: "Tre hapa konkretë për një bankë", type: "text", get: a => a.Q18_three_steps }
+    ];
+
+    const barrierRows = [
+      ["Mungesa e buxhetit te dedikuar per investime ne IA", "budget"],
+      ["Mungesa e stafit te kualifikuar ne fushen e IA", "staff"],
+      ["Infrastruktura teknologjike e pamjaftueshme", "infrastructure"],
+      ["Mungesa e te dhenave cilesore per te trajnuar modele IA", "data"],
+      ["Paqartesia e kuadrit rregullator per IA", "regulatory"],
+      ["Rezistenca ndaj ndryshimit brenda organizates", "resistance"]
+    ];
+    const sevCols = ["Nuk eshte pengese", "Pengese e vogel", "Pengese e moderuar", "Pengese e madhe", "Pengese kritike"];
+    const sevIndex = { "Nuk eshte pengese": 1, "Pengese e vogel": 2, "Pengese e moderuar": 3, "Pengese e madhe": 4, "Pengese kritike": 5 };
+
+    let records = [], completed = loadCompleted(), view = [], index = 0, marking = false;
+
+    function loadCompleted() { try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]").map(String)); } catch { return new Set(); } }
+    function saveCompleted() { localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed])); }
+
+    async function syncFromServer() {
+      try {
+        const r = await fetch(API_URL, { cache: "no-store" });
+        if (r.ok) { const j = await r.json(); completed = new Set((j.reviewed || []).map(String)); saveCompleted(); return true; }
+      } catch (_) {}
+      return false;
+    }
+    function pushReviewed(id) { fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: String(id) }) }).catch(() => {}); }
+    function clearReviewedServer() { return fetch(API_URL, { method: "DELETE" }).catch(() => {}); }
+
+    function escapeHtml(v) { return String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c])); }
+    const ratingBand = v => v <= 2 ? "low" : v === 3 ? "mid" : "high";
+    const barrierBand = i => i >= 4 ? "low" : i === 3 ? "mid" : "high"; // high severity = red
+
+    function questionHtml(q, a) {
+      const title = `${q.code} · ${escapeHtml(q.label)}`;
+      if (q.type === "chips") return `<div class="section-title">${title}</div>${areasHtml(a)}`;
+      if (q.type === "rank") return `<div class="section-title">${title}</div>${rankHtml(a)}`;
+      if (q.type === "barriers") return `<div class="section-title">${title}</div>${barriersHtml(a)}`;
+      if (q.type === "rating") {
+        const v = q.get(a);
+        return `<div class="section-title">${title}</div><div class="value rating ${ratingBand(v)}">${escapeHtml(v)} / 5</div>`;
+      }
+      if (q.type === "text") {
+        const t = (q.get(a) || "").trim();
+        return `<div class="section-title with-copy"><span>${title}</span>${t ? copyBtn(t) : ""}</div>` +
+               `<div class="text ${t ? "" : "empty"}">${t ? escapeHtml(t) : "Pa përgjigje"}</div>`;
+      }
+      return `<div class="section-title">${title}</div><div class="value">${escapeHtml(q.get(a))}</div>`;
+    }
+
+    function areasHtml(a) {
+      const areas = (a.Q6_areas || []);
+      if (!areas.length) return `<div class="chips"><span class="chip">— asnjë fushë e zgjedhur —</span></div>`;
+      return `<div class="chips">${areas.map(s => `<span class="chip">${escapeHtml(s)}</span>`).join("")}</div>`;
+    }
+
+    function rankHtml(a) {
+      return `<ol class="rank">${(a.Q9_ranking || []).map(s => `<li>${escapeHtml(s)}</li>`).join("")}</ol>`;
+    }
+
+    function barriersHtml(a) {
+      const header = `<div class="mrow mhrow"><div class="mhcorner">Pengesa</div>${sevCols.map((c, i) => `<div class="mhead">${i + 1}<small>${escapeHtml(c)}</small></div>`).join("")}</div>`;
+      const rows = barrierRows.map(([label, key]) => {
+        const v = sevIndex[a.Q11_barriers[key]] || 0;
+        const cells = [1, 2, 3, 4, 5].map(opt => `<div class="mcell"><span class="radio ${opt === v ? "sel " + barrierBand(v) : ""}"></span></div>`).join("");
+        return `<div class="mrow" title="${escapeHtml(label)}: ${escapeHtml(a.Q11_barriers[key])}"><div class="mstmt">${escapeHtml(label)}</div>${cells}</div>`;
+      }).join("");
+      return `<div class="matrix">${header}${rows}</div>`;
+    }
+
+    function copyBtn(text) {
+      return `<button class="copy-btn" type="button" data-copy="${escapeHtml(text)}" title="Kopjo përgjigjen" aria-label="Kopjo përgjigjen">${ICON_COPY}<span>Kopjo</span></button>`;
+    }
+
+    function cardHtml(record) {
+      const a = record.answers, m = record.metadata, id = String(m.id);
+      return `
+        <section class="card">
+          <div class="card-head">
+            <span class="id">#${escapeHtml(id)}</span>
+            <span class="role">${escapeHtml(shortRole(a.Q2_role))}</span>
+            <span class="bank">${escapeHtml(m.bank)}</span>
+            <span class="spacer"></span>
+          </div>
+          ${questions.map(q => questionHtml(q, a)).join("")}
+          <div class="done-wrap"><button class="done" id="doneBtn" type="button">Rishiko</button></div>
+          <div class="pad-bottom"></div>
+        </section>`;
+    }
+
+    function recomputeView(keepId) {
+      const filter = document.getElementById("archetypeFilter").value;
+      view = records.filter(r => !completed.has(String(r.metadata.id)) && (filter === "all" || r.answers.Q2_role === filter));
+      if (keepId != null) { const f = view.findIndex(r => String(r.metadata.id) === String(keepId)); if (f !== -1) index = f; }
+      if (index >= view.length) index = view.length - 1;
+      if (index < 0) index = 0;
+    }
+
+    function render() {
+      const slot = document.getElementById("cardSlot");
+      const total = records.length;
+      const unseen = records.filter(r => !completed.has(String(r.metadata.id))).length;
+      document.getElementById("completedCount").textContent = String(completed.size);
+      document.getElementById("totalCount").textContent = String(total);
+      document.getElementById("visibleCount").textContent = String(view.length);
+      document.getElementById("position").textContent = String(view.length ? index + 1 : 0);
+      document.getElementById("barFill").style.width = (view.length ? ((index + 1) / view.length) * 100 : 0) + "%";
+      document.getElementById("prevBtn").disabled = index <= 0;
+      document.getElementById("nextBtn").disabled = index >= view.length - 1;
+
+      if (!view.length) {
+        const allDone = unseen === 0 && total > 0;
+        slot.innerHTML = `<section class="empty visible"><strong>${allDone ? "Të gjithë u rishikuan 🎉" : "S'ka të dhëna që përputhen"}</strong>${allDone ? "Çdo ekspert sintetik është rishikuar." : "Provoni një filtër tjetër ose Rivendos."}</section>`;
+        return;
+      }
+      slot.innerHTML = cardHtml(view[index]);
+      document.getElementById("doneBtn").addEventListener("click", markDone);
+      slot.querySelectorAll(".copy-btn").forEach(b => b.addEventListener("click", copyText));
+    }
+
+    function markDone() {
+      if (!view.length || marking) return;
+      marking = true;
+      const id = String(view[index].metadata.id);
+      const btn = document.getElementById("doneBtn");
+      if (btn) { btn.classList.add("marked"); btn.textContent = "Rishikuar ✓"; btn.disabled = true; }
+      pushReviewed(id);
+      setTimeout(() => { completed.add(id); saveCompleted(); recomputeView(); marking = false; render(); window.scrollTo({ top: 0, behavior: "smooth" }); }, 260);
+    }
+    function go(d) { const t = index + d; if (t < 0 || t >= view.length) return; index = t; render(); }
+
+    function copyText(e) {
+      const btn = e.currentTarget, text = btn.dataset.copy || "";
+      if (!text) return;
+      const ok = () => { btn.classList.add("copied"); btn.innerHTML = ICON_CHECK + "<span>U kopjua</span>"; setTimeout(() => { btn.classList.remove("copied"); btn.innerHTML = ICON_COPY + "<span>Kopjo</span>"; }, 1300); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok).catch(() => fallbackCopy(text, ok));
+      else fallbackCopy(text, ok);
+    }
+    function fallbackCopy(text, onSuccess) {
+      const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); onSuccess(); } catch (_) {}
+      document.body.removeChild(ta);
+    }
+
+    function setupFilters() {
+      const select = document.getElementById("archetypeFilter");
+      [...new Set(records.map(r => r.answers.Q2_role))].sort().forEach(role => {
+        const opt = document.createElement("option"); opt.value = role; opt.textContent = shortRole(role); select.appendChild(opt);
+      });
+      select.addEventListener("change", () => { index = 0; recomputeView(); render(); });
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => go(-1));
+    document.getElementById("nextBtn").addEventListener("click", () => go(1));
+    document.getElementById("resetSeen").addEventListener("click", () => {
+      const n = completed.size;
+      if (n === 0) { alert("ℹ️ Nuk ka asnjë shenjë 'Rishikuar' për t'u fshirë."); return; }
+      const warning = "⚠️ KUJDES — VEPRIM I PAKTHYESHËM ⚠️\n\n" + `Do të fshihen të GJITHA ${n} shenjat 'Rishikuar'.\n` + "I gjithë progresi juaj do të humbasë PËRGJITHMONË dhe çdo ekspert do të rishfaqet.\n\nKy veprim NUK mund të zhbëhet.\n\nA jeni vërtet i/e sigurt?";
+      if (!confirm(warning)) return;
+      if (!confirm(`Konfirmim i fundit: të fshihen përfundimisht ${n} shenja 'Rishikuar'?`)) return;
+      clearReviewedServer(); completed = new Set(); saveCompleted(); index = 0; recomputeView(); render();
+    });
+    document.addEventListener("keydown", e => {
+      if (e.target.tagName === "SELECT") return;
+      if (e.key === "ArrowLeft") go(-1); else if (e.key === "ArrowRight") go(1); else if (e.key.toLowerCase() === "d") markDone();
+    });
+    (function enableSwipe() {
+      const stage = document.querySelector(".stage"); let x0 = null, y0 = null;
+      stage.addEventListener("touchstart", e => { const t = e.changedTouches[0]; x0 = t.clientX; y0 = t.clientY; }, { passive: true });
+      stage.addEventListener("touchend", e => {
+        if (x0 === null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
+        x0 = y0 = null;
+      }, { passive: true });
+    })();
+
+    fetch(DATA_URL)
+      .then(r => { if (!r.ok) throw new Error(`Nuk u ngarkua ${DATA_URL}`); return r.json(); })
+      .then(async data => { records = data; setupFilters(); await syncFromServer(); recomputeView(); render(); })
+      .catch(err => { document.getElementById("cardSlot").innerHTML = `<section class="empty visible"><strong>${escapeHtml(err.message)}</strong>Shërbejeni përmes http (p.sh. <code>python -m http.server</code>).</section>`; });
+  </script>
+</body>
+</html>

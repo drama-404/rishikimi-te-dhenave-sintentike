@@ -1,5 +1,8 @@
-# Real survey export — never commit real respondent data to a (possibly public) repo
+# Real survey exports — never commit real respondent data to a (possibly public) repo.
+# (.xlsx = customer export; root-level .csv = real experts export. Synthetic CSVs
+#  live under output/ and are intentionally NOT ignored.)
 *.xlsx
+/*.csv
 
 # Local tooling / caches
 .claude/

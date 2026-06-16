@@ -1,13 +1,18 @@
-# IMPORTANT: never publish the real survey export (contains real respondent data)
+# IMPORTANT: never publish real respondent data (customer .xlsx, real experts .csv at root)
 *.xlsx
+/*.csv
 
-# Generator + docs are not needed by the hosted review UI
+# Generators + docs/forms are not needed by the hosted review UIs
 data_pipeline.py
+data_pipeline_experts.py
 survey_specification_albanian.md
 survey_specification_albanian.json
+form02-Inteligjenca-Artificiale-ne-Shqiperi-ne-Sherbime-Bankare-Ekspertet.md
 .claude
 
-# Local-only analysis artifacts — the UI only needs output/synthetic_records.json
+# Local-only analysis artifacts — the UIs only need the *_records.json files
 output/synthetic_analysis.csv
 output/synthetic_forms_export.csv
 output/analysis_summary.json
+output/experts_synthetic.csv
+output/experts_summary.json

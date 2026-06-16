@@ -11,7 +11,16 @@
 //   POST   /api/reviewed {id}   -> marks one id reviewed
 //   DELETE /api/reviewed        -> clears all (used by the Rivendos button)
 
-const KEY = "reviewed";
+// Separate reviewed-sets per form via ?form=... (default key keeps the
+// existing customer data; experts use a distinct key).
+function keyForReq(req) {
+  let form = req.query && req.query.form;
+  if (!form) {
+    try { form = new URL(req.url, "http://x").searchParams.get("form"); } catch (_) {}
+  }
+  const safe = String(form || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 32);
+  return safe ? `reviewed:${safe}` : "reviewed";
+}
 
 // Resolve the Upstash REST endpoint + write token from env, regardless of the
 // prefix the Vercel/Upstash integration used (KV_REST_API_*, UPSTASH_REDIS_*,
@@ -52,9 +61,10 @@ module.exports = async (req, res) => {
     res.status(500).json({ error: "Storage not configured (no *_REST_URL / *_REST_TOKEN env vars found)." });
     return;
   }
+  const key = keyForReq(req);
   try {
     if (req.method === "GET") {
-      const ids = await redis(store, ["SMEMBERS", KEY]);
+      const ids = await redis(store, ["SMEMBERS", key]);
       res.status(200).json({ reviewed: Array.isArray(ids) ? ids : [] });
       return;
     }
@@ -63,12 +73,12 @@ module.exports = async (req, res) => {
       if (typeof body === "string") { try { body = JSON.parse(body); } catch (_) { body = {}; } }
       const id = body && body.id != null ? String(body.id) : "";
       if (!id) { res.status(400).json({ error: "missing id" }); return; }
-      await redis(store, ["SADD", KEY, id]);
+      await redis(store, ["SADD", key, id]);
       res.status(200).json({ ok: true });
       return;
     }
     if (req.method === "DELETE") {
-      await redis(store, ["DEL", KEY]);
+      await redis(store, ["DEL", key]);
       res.status(200).json({ ok: true });
       return;
     }

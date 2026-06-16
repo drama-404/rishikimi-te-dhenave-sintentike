@@ -1,0 +1,498 @@
+[
+  {
+    "metadata": {
+      "id": 1,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)",
+      "bank": "Intesa Sanpaolo Bank",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "4/14/2026 9:42",
+      "completion_time": "4/14/2026 9:54",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)",
+      "Q3_experience": "Mbi 20 vjet",
+      "Q4_dept": "Po, departament te dedikuar",
+      "Q5_uses_ai": "Po, ne disa fusha tashme",
+      "Q6_areas": [
+        "Zbulimi i mashtrimeve (fraud detection)",
+        "Sherbimi ndaj klientit (chatbot, asistent virtual)",
+        "Analiza e te dhenave dhe raportimi",
+        "Perputhshmeria rregullatore (compliance, AML/KYC)",
+        "Vleresimi i riskut te kreditit (credit scoring)"
+      ],
+      "Q7_example": "Ne nivel grupi kemi nje laborator te dedikuar per inteligjencen artificiale dhe programe te brendshme per adoptimin e saj. Lokalisht kemi nisur me zbulimin e mashtrimeve dhe me asistente virtuale per pyetjet baze te klienteve. Ka funksionuar mire ulja e kohes se pergjigjes dhe identifikimi i transaksioneve te dyshimta; sfida kryesore mbetet cilesia e te dhenave lokale dhe integrimi me sistemet ekzistuese (core banking).",
+      "Q8_potential": 5,
+      "Q9_ranking": [
+        "Zbulimi i mashtrimeve",
+        "Vleresimi i riskut te kreditit",
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Perputhshmeria rregullatore",
+        "Automatizimi i proceseve te brendshme",
+        "Personalizimi i produkteve per klientin"
+      ],
+      "Q10_customer_change": "Po, ndjeshem. Klientet presin sherbim 24/7 ne aplikacion, hapje llogarie online dhe pergjigje te menjehershme. Pritshmeria eshte rritur sidomos te brezi i ri.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese e moderuar",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese e madhe",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Paqartesia e kuadrit rregullator se bashku me mungesen e stafit te specializuar. Pa nje kuader te qarte, edhe kur buxheti ekziston, investimet frenohen nga rreziku ligjor.",
+      "Q13_privacy": "Po, privatesia dhe transparenca jane prioritet. Zbatojme Ligjin 124/2024 per mbrojtjen e te dhenave dhe parimet e grupit per IA te pergjegjshme, me mbikeqyrje njerezore mbi cdo vendim automatik qe prek klientin.",
+      "Q14_regulation": "Ekziston por eshte i pamjaftueshem",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "Banka e Shqiperise duhet te nxjerre udhezime specifike per menaxhimin e rrezikut te modeleve IA, te harmonizoje kuadrin me EU AI Act (sidomos credit scoring si risk i larte) dhe te krijoje nje 'sandbox' rregullator ku bankat te testojne raste perdorimi te kontrolluara.",
+      "Q17_vision": "Pas 5-10 vitesh shumica e nderveprimeve do jene digjitale; vleresimi i rrezikut dhe kredidhenia do mbeshteten gjeresisht nga IA, ndersa degat fizike do reduktohen dhe do fokusohen te keshillimi me vlere te shtuar.",
+      "Q18_three_steps": "1. Strategji e qarte per IA dhe qeverisje e te dhenave.\n2. Nis me raste me impakt te larte dhe risk te ulet (chatbot, automatizim back-office).\n3. Investo ne staf dhe trajnim, ose partneritet me fintech vendase."
+    }
+  },
+  {
+    "metadata": {
+      "id": 2,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)",
+      "bank": "Intesa Sanpaolo Bank",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "4/16/2026 14:08",
+      "completion_time": "4/16/2026 14:21",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)",
+      "Q3_experience": "11-20 vjet",
+      "Q4_dept": "Po, departament te dedikuar",
+      "Q5_uses_ai": "Po, ne disa fusha tashme",
+      "Q6_areas": [
+        "Sherbimi ndaj klientit (chatbot, asistent virtual)",
+        "Zbulimi i mashtrimeve (fraud detection)",
+        "Analiza e te dhenave dhe raportimi",
+        "Marketingu dhe personalizimi i ofertave",
+        "Automatizimi i proceseve te brendshme (back-office)"
+      ],
+      "Q7_example": "Kemi futur asistente virtuale ne kanalet digjitale dhe modele per personalizimin e ofertave. Asistenti virtual ka ulur ngarkesen ne qendren e thirrjeve, por ende eshte i kufizuar per kerkesa komplekse dhe kalon te operatori njerezor. Personalizimi kerkon te dhena me cilesi me te larte se sa kemi sot.",
+      "Q8_potential": 5,
+      "Q9_ranking": [
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Zbulimi i mashtrimeve",
+        "Personalizimi i produkteve per klientin",
+        "Vleresimi i riskut te kreditit",
+        "Automatizimi i proceseve te brendshme",
+        "Perputhshmeria rregullatore"
+      ],
+      "Q10_customer_change": "Po. Klientet, sidomos ata me te rinj, e konsiderojne aplikacionin si kanalin kryesor dhe krahasojne sherbimin tone me platformat fintech nderkombetare.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese e moderuar",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese kritike",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Kuadri rregullator. Per nje grup nderkombetar, mungesa e rregullave te qarta lokale per IA krijon pasiguri ligjore dhe ngadaleson vendimet e investimit.",
+      "Q13_privacy": "Po. Cdo perdorim i IA ne vendimmarrje kalon nga nje vleresim i ndikimit mbi privatesine dhe ruan mbikeqyrjen njerezore. Transparenca ndaj klientit eshte e detyrueshme per ne.",
+      "Q14_regulation": "Ekziston por eshte i pamjaftueshem",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "Te percaktohet qarte autoriteti pergjegjes per mbikeqyrjen e IA ne banka, te publikohen udhezime per modelet me risk te larte dhe te nxitet bashkepunimi me rregullatoret e BE-se perpara afatit te gushtit 2026 te EU AI Act.",
+      "Q17_vision": "Banking-u do jete kryesisht 'digital-first', me hapje llogarish dhe kredi te shpejta online; diferencimi mes bankave do varet nga sa mire perdorin te dhenat dhe IA-ne.",
+      "Q18_three_steps": "1. Ndertimi i nje platforme te unifikuar te dhenash.\n2. Pilotim i kontrolluar ne nje fushe (p.sh. chatbot ose AML).\n3. Ngritja e qeverisjes se modeleve dhe trajnimi i stafit."
+    }
+  },
+  {
+    "metadata": {
+      "id": 3,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Menaxher IT / Teknologjie / Inovacioni",
+      "bank": "Intesa Sanpaolo Bank",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "4/22/2026 11:30",
+      "completion_time": "4/22/2026 11:41",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Menaxher IT / Teknologjie / Inovacioni",
+      "Q3_experience": "11-20 vjet",
+      "Q4_dept": "Po, departament te dedikuar",
+      "Q5_uses_ai": "Po, ne disa fusha tashme",
+      "Q6_areas": [
+        "Zbulimi i mashtrimeve (fraud detection)",
+        "Analiza e te dhenave dhe raportimi",
+        "Automatizimi i proceseve te brendshme (back-office)",
+        "Perputhshmeria rregullatore (compliance, AML/KYC)"
+      ],
+      "Q7_example": "Perdorim modele per zbulimin e mashtrimeve dhe automatizimin e raportimeve rregullatore. Rezultatet ne fraud detection kane qene premtuese, por modelet kerkojne ritrajnim te vazhdueshem dhe nje infrastrukture te dhenash qe ende po e konsolidojme. Integrimi me sistemet legacy mbetet pjesa me e veshtire.",
+      "Q8_potential": 4,
+      "Q9_ranking": [
+        "Zbulimi i mashtrimeve",
+        "Automatizimi i proceseve te brendshme",
+        "Vleresimi i riskut te kreditit",
+        "Perputhshmeria rregullatore",
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Personalizimi i produkteve per klientin"
+      ],
+      "Q10_customer_change": "Po, kerkesa per sherbime te menjehershme dhe vetesherbim ne aplikacion eshte rritur; klientet tolerojne gjithnje e me pak nderprerjet.",
+      "Q11_barriers": {
+        "budget": "Pengese e moderuar",
+        "staff": "Pengese kritike",
+        "infrastructure": "Pengese kritike",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese e madhe",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Mungesa e stafit te kualifikuar ne IA dhe infrastruktura. Pa inxhiniere te dhenash dhe platforme te qendrueshme, projektet mbeten ne faze pilot dhe nuk shkojne ne prodhim.",
+      "Q13_privacy": "Po. Aplikojme minimizimin e te dhenave dhe enkriptim perpara se te dhenat te perpunohen nga modelet; vendimet me ndikim te larte mbahen nen mbikeqyrje njerezore.",
+      "Q14_regulation": "Ekziston por eshte i pamjaftueshem",
+      "Q15_eu_ai_act": 3,
+      "Q16_recommendations": "Standardizimi i qeverisjes se modeleve IA, kerkesa minimale per dokumentim teknik dhe log-im te mbikeqyrjes njerezore, si dhe nxitja e ndarjes se anonimizuar te te dhenave mes institucioneve per trajnim.",
+      "Q17_vision": "Shumica e proceseve te brendshme do jene te automatizuara dhe vendimet do mbeshteten nga modele; do rritet roli i ekipeve te te dhenave brenda bankave.",
+      "Q18_three_steps": "1. Konsolidim i te dhenave dhe nje platforme e vetme.\n2. Punesim/trajnim i inxhiniereve te te dhenave.\n3. Nje rast perdorimi ne prodhim me matje te qarte impakti."
+    }
+  },
+  {
+    "metadata": {
+      "id": 4,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Menaxher IT / Teknologjie / Inovacioni",
+      "bank": "BKT (Banka Kombetare Tregtare)",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "4/28/2026 16:12",
+      "completion_time": "4/28/2026 16:23",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Menaxher IT / Teknologjie / Inovacioni",
+      "Q3_experience": "6-10 vjet",
+      "Q4_dept": "Po, por eshte pjese e departamentit te IT",
+      "Q5_uses_ai": "Jo, por kemi plane konkrete per vitin e ardhshem",
+      "Q6_areas": [
+        "Sherbimi ndaj klientit (chatbot, asistent virtual)",
+        "Automatizimi i proceseve te brendshme (back-office)"
+      ],
+      "Q7_example": "Aktualisht jemi te forte ne banking-un digjital me aplikacionin tone mobile, por IA-ne ende nuk e perdorim ne prodhim. Per vitin e ardhshem planifikojme nje chatbot per pyetjet baze dhe automatizim te disa proceseve back-office. Sfida me e madhe eshte nderlidhja me core banking system-in dhe sigurimi i te dhenave te paster.",
+      "Q8_potential": 4,
+      "Q9_ranking": [
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Automatizimi i proceseve te brendshme",
+        "Zbulimi i mashtrimeve",
+        "Vleresimi i riskut te kreditit",
+        "Personalizimi i produkteve per klientin",
+        "Perputhshmeria rregullatore"
+      ],
+      "Q10_customer_change": "Po. Klientet perdorin mobile banking-un 24/7 dhe kerkojne hapje llogarie e pagesa pa ardhur ne dege. Numri i vizitave ne sportel ka rene.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese kritike",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese e moderuar",
+        "resistance": "Pengese e madhe"
+      },
+      "Q12_urgent_barrier": "Infrastruktura teknologjike. Pa nje platforme te dhenash dhe integrim te mire me sistemet ekzistuese, cdo projekt IA ngec ne faze testimi.",
+      "Q13_privacy": "Po, ka shqetesime per privatesine. Mendojme t'i adresojme me politika te brendshme, anonimizim te te dhenave per trajnim dhe akses te kufizuar.",
+      "Q14_regulation": "Ekziston por eshte i pamjaftueshem",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "Krijimi i nje kuadri rregullator te qarte per IA, fillimisht ne nje mjedis testimi, dhe me pas futja graduale ne sektore te caktuar; gjithashtu mbeshtetje per ngritjen e kapaciteteve.",
+      "Q17_vision": "IA do perdoret me shume per sherbime specifike si chatbot me klientet dhe automatizim sherbimesh; degat do shnderrohen ne pika keshillimi.",
+      "Q18_three_steps": "1. Ngritja e infrastruktures se nevojshme.\n2. Marrja/trajnimi i stafit perkates.\n3. Testimi i nje sherbimi te caktuar me IA perpara prodhimit."
+    }
+  },
+  {
+    "metadata": {
+      "id": 5,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)",
+      "bank": "BKT (Banka Kombetare Tregtare)",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "5/4/2026 10:05",
+      "completion_time": "5/4/2026 10:18",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)",
+      "Q3_experience": "11-20 vjet",
+      "Q4_dept": "Po, por eshte pjese e departamentit te IT",
+      "Q5_uses_ai": "Jo, por e kemi ne diskutim",
+      "Q6_areas": [
+        "Zbulimi i mashtrimeve (fraud detection)",
+        "Vleresimi i riskut te kreditit (credit scoring)",
+        "Automatizimi i proceseve te brendshme (back-office)"
+      ],
+      "Q7_example": "Si banka me e madhe ne treg kemi mundesi te mira investimi, por po veprojme me kujdes. Po diskutojme perdorimin e IA per vleresimin e rrezikut te kreditit dhe zbulimin e mashtrimeve. Ende nuk kemi nje rast ne prodhim sepse duam fillimisht nje strategji te qarte dhe nje kuader te brendshem qeverisjeje.",
+      "Q8_potential": 5,
+      "Q9_ranking": [
+        "Vleresimi i riskut te kreditit",
+        "Zbulimi i mashtrimeve",
+        "Automatizimi i proceseve te brendshme",
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Perputhshmeria rregullatore",
+        "Personalizimi i produkteve per klientin"
+      ],
+      "Q10_customer_change": "Po, klientet kerkojne procese me te shpejta kredie dhe pagesash dhe me pak burokraci ne dege.",
+      "Q11_barriers": {
+        "budget": "Pengese e moderuar",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese e madhe",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese e madhe",
+        "resistance": "Pengese e madhe"
+      },
+      "Q12_urgent_barrier": "Stafi i kualifikuar dhe paqartesia rregullatore. Buxhetin e kemi, por mungojne specialistet dhe nje kuader ligjor qe te na japi siguri per kredidhenien me IA.",
+      "Q13_privacy": "Po, ka shqetesime te konsiderueshme, sidomos per vendimet e kredise. Mendojme t'i adresojme me transparence ndaj klientit dhe me te drejten per shqyrtim njerezor te vendimit.",
+      "Q14_regulation": "Praktikisht nuk ekziston specifikisht per IA",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "Hartimi i nje kuadri rregullator specifik per IA ne banka, percaktimi i pergjegjesive mes Bankes se Shqiperise dhe AFSA-s, dhe nxitja e investimeve ne kapacitete njerezore.",
+      "Q17_vision": "Kreditimi do behet me inteligjent dhe me i shpejte; konkurrenca do zhvendoset nga rrjeti i degeve te aftesia per te perdorur te dhenat.",
+      "Q18_three_steps": "1. Strategji e qarte IA dhe infrastrukture te dhenash.\n2. Fillim me raste me impakt te larte dhe risk te ulet.\n3. Ndertim i kapaciteteve te brendshme ose partneritet."
+    }
+  },
+  {
+    "metadata": {
+      "id": 6,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Perfaqesues rregullator (Banka e Shqiperise, AFSA, ose institucion tjeter mbikeqyres)",
+      "bank": "Banka e Shqiperise / AFSA",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "5/9/2026 13:20",
+      "completion_time": "5/9/2026 13:38",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Perfaqesues rregullator (Banka e Shqiperise, AFSA, ose institucion tjeter mbikeqyres)",
+      "Q3_experience": "11-20 vjet",
+      "Q4_dept": "Po, por eshte pjese e departamentit te IT",
+      "Q5_uses_ai": "Jo, por e kemi ne diskutim",
+      "Q6_areas": [
+        "Perputhshmeria rregullatore (compliance, AML/KYC)",
+        "Zbulimi i mashtrimeve (fraud detection)",
+        "Analiza e te dhenave dhe raportimi"
+      ],
+      "Q7_example": "Nga kendveshtrimi mbikeqyres, interesi kryesor eshte perdorimi i IA per perputhshmerine rregullatore (AML/KYC) dhe monitorimin e transaksioneve. Vleresojme se teknologjia ndihmon, por mungon ende nje kuader i qarte per mbikeqyrjen e modeleve dhe per pergjegjesine ne rast vendimesh te gabuara.",
+      "Q8_potential": 4,
+      "Q9_ranking": [
+        "Perputhshmeria rregullatore",
+        "Zbulimi i mashtrimeve",
+        "Vleresimi i riskut te kreditit",
+        "Automatizimi i proceseve te brendshme",
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Personalizimi i produkteve per klientin"
+      ],
+      "Q10_customer_change": "Po. Verejme presion ne rritje nga konsumatoret per sherbime digjitale, gje qe rrit edhe rendesine e mbrojtjes se te dhenave dhe transparences ne vendimmarrje.",
+      "Q11_barriers": {
+        "budget": "Pengese e moderuar",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese e moderuar",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese kritike",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Paqartesia e kuadrit rregullator. Pa rregulla te qarta per IA - sidomos per sistemet me risk te larte si credit scoring - bankat veprojne me kujdes te tepruar dhe mbikeqyrja behet e veshtire. Kjo eshte pengesa qe duhet adresuar e para.",
+      "Q13_privacy": "Po, ky eshte nje shqetesim qendror. Ligji 124/2024 per mbrojtjen e te dhenave vendos kerkesa per vendimmarrjen e automatizuar dhe profilizimin. Adresimi kerkon vleresime te ndikimit mbi mbrojtjen e te dhenave, transparence ndaj klientit dhe mbikeqyrje njerezore te detyrueshme per vendimet me ndikim te larte.",
+      "Q14_regulation": "Praktikisht nuk ekziston specifikisht per IA",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "1) Banka e Shqiperise te publikoje udhezime per menaxhimin e rrezikut te modeleve IA. 2) Harmonizim i kuadrit me EU AI Act, duke klasifikuar credit scoring-un si risk te larte perpara afatit te gushtit 2026. 3) Krijimi i nje 'regulatory sandbox' dhe rritja e kapaciteteve mbikeqyrese te institucioneve.",
+      "Q17_vision": "Pres nje kuader rregullator me te pjekur, te perafruar me BE-ne, dhe perdorim me te gjere te IA ne AML dhe credit scoring nen mbikeqyrje me te forte. Sfida do jete balanca mes inovacionit dhe mbrojtjes se konsumatorit.",
+      "Q18_three_steps": "1. Vleresim i rrezikut dhe inventar i sistemeve IA ekzistuese.\n2. Politika e brendshme per qeverisjen e modeleve dhe te dhenave.\n3. Fillim me raste me risk te ulet, me dokumentim e mbikeqyrje njerezore."
+    }
+  },
+  {
+    "metadata": {
+      "id": 7,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Konsulent ose ekspert i jashtem (fintech, teknologji, financa)",
+      "bank": "Konsulence / fintech",
+      "register": "full"
+    },
+    "answers": {
+      "start_time": "5/12/2026 18:44",
+      "completion_time": "5/12/2026 18:55",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Konsulent ose ekspert i jashtem (fintech, teknologji, financa)",
+      "Q3_experience": "6-10 vjet",
+      "Q4_dept": "Jo, por ka plane per te krijuar",
+      "Q5_uses_ai": "Po, ne disa fusha tashme",
+      "Q6_areas": [
+        "Sherbimi ndaj klientit (chatbot, asistent virtual)",
+        "Automatizimi i proceseve te brendshme (back-office)",
+        "Analiza e te dhenave dhe raportimi",
+        "Marketingu dhe personalizimi i ofertave"
+      ],
+      "Q7_example": "Kam ndihmuar disa institucione te vendosin asistente virtuale dhe lexues te automatizuar te formularve. Aty ku te dhenat ishin te paster, rezultati ka qene shume i mire; aty ku te dhenat ishin te shperndara dhe pa cilesi, projektet kane deshtuar ose jane vonuar. Mesimi kryesor: pa qeverisje te te dhenave, IA nuk jep vlere.",
+      "Q8_potential": 5,
+      "Q9_ranking": [
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Zbulimi i mashtrimeve",
+        "Automatizimi i proceseve te brendshme",
+        "Vleresimi i riskut te kreditit",
+        "Personalizimi i produkteve per klientin",
+        "Perputhshmeria rregullatore"
+      ],
+      "Q10_customer_change": "Po, qarte. Klientet i krahasojne bankat me aplikacionet fintech dhe presin te njejten shpejtesi e thjeshtesi.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese kritike",
+        "infrastructure": "Pengese e madhe",
+        "data": "Pengese kritike",
+        "regulatory": "Pengese e madhe",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Cilesia e te dhenave dhe stafi. Shumica e bankave shqiptare nuk kane ende te dhena te gatshme per trajnim modelesh dhe i mungojne inxhinieret e te dhenave; keto duhen adresuar para se te flitet per IA te avancuar.",
+      "Q13_privacy": "Po. Keshilloj gjithmone enkriptim, minimizim te te dhenave dhe nje 'human-in-the-loop' per vendimet qe prekin klientin; ndryshe rreziku reputacional dhe ligjor eshte i larte.",
+      "Q14_regulation": "Ekziston por eshte i pamjaftueshem",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "Udhezime praktike per bankat e vogla, lehtesira fiskale per investime ne teknologji dhe trajnim, dhe nje sandbox ku fintech-et e bankat te testojne bashke pa rrezik rregullator.",
+      "Q17_vision": "Bankat qe investojne sot ne te dhena do dominojne; ato qe presin do mbeten thjesht perdorues te zgjidhjeve te jashtme. Do shohim me shume partneritete banke-fintech.",
+      "Q18_three_steps": "1. Pastrimi dhe qeverisja e te dhenave.\n2. Nje rast perdorimi i thjeshte me ROI te matshem (p.sh. chatbot).\n3. Trajnim i stafit ose marrje e ekspertizes nga jashte."
+    }
+  },
+  {
+    "metadata": {
+      "id": 8,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Konsulent ose ekspert i jashtem (fintech, teknologji, financa)",
+      "bank": "Konsulence",
+      "register": "medium"
+    },
+    "answers": {
+      "start_time": "5/15/2026 12:02",
+      "completion_time": "5/15/2026 12:10",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Konsulent ose ekspert i jashtem (fintech, teknologji, financa)",
+      "Q3_experience": "3-5 vjet",
+      "Q4_dept": "Jo, por ka plane per te krijuar",
+      "Q5_uses_ai": "Jo, por kemi plane konkrete per vitin e ardhshem",
+      "Q6_areas": [
+        "Sherbimi ndaj klientit (chatbot, asistent virtual)",
+        "Automatizimi i proceseve te brendshme (back-office)"
+      ],
+      "Q7_example": "Kryesisht kemi pilotuar automatizim te proceseve back-office dhe nje chatbot baze. Ka ndihmuar ne shpejtesi, por ende kerkon shume mbikeqyrje njerezore.",
+      "Q8_potential": 4,
+      "Q9_ranking": [
+        "Automatizimi i proceseve te brendshme",
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Zbulimi i mashtrimeve",
+        "Vleresimi i riskut te kreditit",
+        "Personalizimi i produkteve per klientin",
+        "Perputhshmeria rregullatore"
+      ],
+      "Q10_customer_change": "Po, klientet duan procese me te shpejta dhe online.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese e madhe",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese e moderuar",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Buxheti dhe stafi. Bankat e vogla e kane te veshtire te financojne dhe te gjejne staf per IA.",
+      "Q13_privacy": "Po, ka shqetesime; duhet kujdes me te dhenat personale.",
+      "Q14_regulation": "Nuk kam informacion te mjaftueshem per te vleresuar",
+      "Q15_eu_ai_act": 3,
+      "Q16_recommendations": "Informim me i mire, rregullore te percaktuara qarte dhe mbeshtetje per trajnimin e stafit.",
+      "Q17_vision": "Do kete me shume automatizim dhe me pak pune manuale ne sportel.",
+      "Q18_three_steps": "1. Trajnim stafi. 2. Nje rast pilot. 3. Investim ne infrastrukture."
+    }
+  },
+  {
+    "metadata": {
+      "id": 9,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Specialist Bankar",
+      "bank": "Credins Bank",
+      "register": "terse"
+    },
+    "answers": {
+      "start_time": "5/18/2026 9:15",
+      "completion_time": "5/18/2026 9:21",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Specialist Bankar",
+      "Q3_experience": "6-10 vjet",
+      "Q4_dept": "Po, por eshte pjese e departamentit te IT",
+      "Q5_uses_ai": "Jo, por e kemi ne diskutim",
+      "Q6_areas": [],
+      "Q7_example": "Aktualisht nuk perdorim. Eshte ne diskutim per sherbimin ndaj klientit.",
+      "Q8_potential": 3,
+      "Q9_ranking": [
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Zbulimi i mashtrimeve",
+        "Automatizimi i proceseve te brendshme",
+        "Vleresimi i riskut te kreditit",
+        "Personalizimi i produkteve per klientin",
+        "Perputhshmeria rregullatore"
+      ],
+      "Q10_customer_change": "Po, kerkojne me shume sherbime online.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese e madhe",
+        "infrastructure": "Pengese e madhe",
+        "data": "Pengese e moderuar",
+        "regulatory": "Pengese e moderuar",
+        "resistance": "Pengese e vogel"
+      },
+      "Q12_urgent_barrier": "Buxheti dhe infrastruktura.",
+      "Q13_privacy": "Po.",
+      "Q14_regulation": "Nuk kam informacion te mjaftueshem per te vleresuar",
+      "Q15_eu_ai_act": 2,
+      "Q16_recommendations": "Rregullore me te qarta dhe trajnim stafi.",
+      "Q17_vision": "Me pak radhe ne sportel, me shume sherbim ne aplikacion.",
+      "Q18_three_steps": "Trajnim stafi, instalim sistemesh, nje sherbim pilot."
+    }
+  },
+  {
+    "metadata": {
+      "id": 10,
+      "synthetic": true,
+      "purpose": "disclosed synthetic expert respondent for methodology support only",
+      "role_persona": "Operacione",
+      "bank": "Tirana Bank",
+      "register": "terse"
+    },
+    "answers": {
+      "start_time": "5/20/2026 15:48",
+      "completion_time": "5/20/2026 15:53",
+      "Q1_consent": "Po, jap pelqimin tim",
+      "Q2_role": "Operacione",
+      "Q3_experience": "3-5 vjet",
+      "Q4_dept": "Jo, por ka plane per te krijuar",
+      "Q5_uses_ai": "Nuk jam i/e sigurt",
+      "Q6_areas": [],
+      "Q7_example": "Ne shqyrtim. Mendojme per automatizim te proceseve ne sportel.",
+      "Q8_potential": 3,
+      "Q9_ranking": [
+        "Automatizimi i proceseve te brendshme",
+        "Sherbimi ndaj klientit (chatbot, asistente virtuale)",
+        "Zbulimi i mashtrimeve",
+        "Vleresimi i riskut te kreditit",
+        "Personalizimi i produkteve per klientin",
+        "Perputhshmeria rregullatore"
+      ],
+      "Q10_customer_change": "Po pak.",
+      "Q11_barriers": {
+        "budget": "Pengese e madhe",
+        "staff": "Pengese e moderuar",
+        "infrastructure": "Pengese e madhe",
+        "data": "Pengese e madhe",
+        "regulatory": "Pengese e moderuar",
+        "resistance": "Pengese e moderuar"
+      },
+      "Q12_urgent_barrier": "Mungesa e buxhetit per investime.",
+      "Q13_privacy": "Jo deri tani.",
+      "Q14_regulation": "Nuk kam informacion te mjaftueshem per te vleresuar",
+      "Q15_eu_ai_act": 3,
+      "Q16_recommendations": "Informim dhe rregullore te percaktuara.",
+      "Q17_vision": "Me pak radhe ne sportel.",
+      "Q18_three_steps": "Trajnim stafi, instalim i sistemeve."
+    }
+  }
+]

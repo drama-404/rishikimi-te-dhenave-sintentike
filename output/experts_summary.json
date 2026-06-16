@@ -1,0 +1,25 @@
+{
+  "n": 10,
+  "synthetic_only": true,
+  "role_counts": {
+    "Drejtues i larte (CEO, Zv. Drejtor, Anetar Bordi)": 3,
+    "Konsulent ose ekspert i jashtem (fintech, teknologji, financa)": 2,
+    "Menaxher IT / Teknologjie / Inovacioni": 2,
+    "Operacione": 1,
+    "Perfaqesues rregullator (Banka e Shqiperise, AFSA, ose institucion tjeter mbikeqyres)": 1,
+    "Specialist Bankar": 1
+  },
+  "H1c_checks": {
+    "potential_mean_Q8": 4.2,
+    "eu_ai_act_readiness_mean_Q15": 2.3,
+    "barrier_severity_means_0to4": {
+      "budget": 2.7,
+      "staff": 3.1,
+      "infrastructure": 2.9,
+      "data": 3.0,
+      "regulatory": 2.8,
+      "resistance": 2.1
+    },
+    "interpretation": "H1c: experts recognise high potential (high Q8) yet rate barriers as significant and the sector as poorly prepared for the EU AI Act (low Q15)."
+  }
+}
